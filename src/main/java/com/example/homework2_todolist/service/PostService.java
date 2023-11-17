@@ -7,6 +7,8 @@ import com.example.homework2_todolist.repository.PostJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -23,5 +25,12 @@ public class PostService {
 //        ===================================== 9
         return new PostResponseDto(savePost);
 //        ===================================== 10
+    }
+
+    public PostResponseDto getPost(Long postId) {
+        PostEntity postEntity = postJpaRepository.findById(postId)
+            .orElseThrow(() -> new NullPointerException("해당 포스트는 없습니다."));
+
+        return new PostResponseDto(postEntity);
     }
 }

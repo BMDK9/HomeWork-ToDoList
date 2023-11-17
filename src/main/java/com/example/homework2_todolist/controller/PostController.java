@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1.0/posts")
 @RequiredArgsConstructor
 public class PostController {
-// ================================================== 2
+    // ================================================== 2
     private final PostService postService;
-// ==================================================== 4
+
+    // ==================================================== 4
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public PostResponseDto addPost(@RequestBody PostAddRequestDto requestDto) {
@@ -21,5 +22,11 @@ public class PostController {
         PostResponseDto responseDto = postService.addPost(requestDto);
         return responseDto;
 //===================================================================== 6
+
+    }
+
+    @GetMapping("/{postId}")
+    public PostResponseDto getPost (@PathVariable Long postId) {
+        return postService.getPost(postId);
     }
 }
