@@ -1,7 +1,6 @@
 package com.example.homework2_todolist.dto;
 
-import com.example.homework2_todolist.entity.PostEntity;
-import lombok.Getter;
+import com.example.homework2_todolist.entity.ToDoEntity;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +12,7 @@ public record PostResponseDto (
      String content,
      LocalDateTime createdAt
 ) {
-       public PostResponseDto(PostEntity savePost) {
+       public PostResponseDto(ToDoEntity savePost) {
         this(savePost.getId(), savePost.getTitle(), savePost.getAuthor(),
             savePost.getContents(),savePost.getCreatedAt());
     }
