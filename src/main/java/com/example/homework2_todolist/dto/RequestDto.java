@@ -3,7 +3,7 @@ package com.example.homework2_todolist.dto;
 import lombok.Getter;
 
 @Getter
-public class PostAddRequestDto {
+public class RequestDto {
     private String title;
     private String author;
     private String password;

@@ -1,10 +1,10 @@
 package com.example.homework2_todolist.dto;
 
-import com.example.homework2_todolist.entity.ToDoEntity;
+import com.example.homework2_todolist.entity.CardEntity;
 
 import java.time.LocalDateTime;
 
-public record PostResponseDto (
+public record ResponseDto(
 //    ======================================================= 5 , 11 public class -> public record
      Long id,
      String title,
@@ -12,7 +12,7 @@ public record PostResponseDto (
      String content,
      LocalDateTime createdAt
 ) {
-       public PostResponseDto(ToDoEntity savePost) {
+       public ResponseDto(CardEntity savePost) {
         this(savePost.getId(), savePost.getTitle(), savePost.getAuthor(),
             savePost.getContents(),savePost.getCreatedAt());
     }

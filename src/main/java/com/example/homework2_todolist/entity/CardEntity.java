@@ -1,6 +1,6 @@
 package com.example.homework2_todolist.entity;
 
-import com.example.homework2_todolist.dto.PostAddRequestDto;
+import com.example.homework2_todolist.dto.RequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "post")
+@Table(name = "card")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ToDoEntity extends TimeEntity {
+public class CardEntity extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +26,18 @@ public class ToDoEntity extends TimeEntity {
     private String contents;
 
 // ================================================= 7
-    public ToDoEntity(PostAddRequestDto requestDto) {
+    public CardEntity(RequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.author = requestDto.getAuthor();
         this.password = requestDto.getPassword();
         this.contents = requestDto.getContent();
 
 //        ============================================ 8
+    }
+
+    public void update(RequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.author = requestDto.getAuthor();
+        this.contents = requestDto.getContent();
     }
 }
