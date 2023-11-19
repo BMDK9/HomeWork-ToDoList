@@ -1,4 +1,4 @@
-package com.example.homework2_todolist.dto;
+package com.sparta.homework2_todolist.dto;
 
 import lombok.Getter;
 import lombok.Setter;

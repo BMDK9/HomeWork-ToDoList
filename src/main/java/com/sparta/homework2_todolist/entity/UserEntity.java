@@ -1,4 +1,4 @@
-package com.example.homework2_todolist.entity;
+package com.sparta.homework2_todolist.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -19,8 +19,4 @@ public class UserEntity {
     private String username;
     @Column(nullable = false)
     private String password;
-
-    public UserRoleEnum getRole() {
-        return null;
-    }
 }

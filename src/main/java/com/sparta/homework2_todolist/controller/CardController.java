@@ -1,8 +1,8 @@
-package com.example.homework2_todolist.controller;
+package com.sparta.homework2_todolist.controller;
 
-import com.example.homework2_todolist.dto.CardRequestDto;
-import com.example.homework2_todolist.dto.CardResponseDto;
-import com.example.homework2_todolist.service.CardService;
+import com.sparta.homework2_todolist.dto.CardRequestDto;
+import com.sparta.homework2_todolist.dto.CardResponseDto;
+import com.sparta.homework2_todolist.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,9 +1,9 @@
-package com.example.homework2_todolist.service;
+package com.sparta.homework2_todolist.service;
 
-import com.example.homework2_todolist.dto.CardResponseDto;
-import com.example.homework2_todolist.dto.CardRequestDto;
-import com.example.homework2_todolist.entity.CardEntity;
-import com.example.homework2_todolist.repository.CardJpaRepository;
+import com.sparta.homework2_todolist.dto.CardResponseDto;
+import com.sparta.homework2_todolist.dto.CardRequestDto;
+import com.sparta.homework2_todolist.entity.CardEntity;
+import com.sparta.homework2_todolist.repository.CardJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

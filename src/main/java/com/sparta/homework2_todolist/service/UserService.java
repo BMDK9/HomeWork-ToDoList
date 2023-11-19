@@ -1,9 +1,9 @@
-package com.example.homework2_todolist.service;
+package com.sparta.homework2_todolist.service;
 
 
-import com.example.homework2_todolist.entity.UserEntity;
-import com.example.homework2_todolist.repository.UserRepository;
-import com.example.homework2_todolist.dto.SignupRequestDto;
+import com.sparta.homework2_todolist.entity.UserEntity;
+import com.sparta.homework2_todolist.repository.UserRepository;
+import com.sparta.homework2_todolist.dto.SignupRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

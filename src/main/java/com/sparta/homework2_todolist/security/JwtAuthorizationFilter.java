@@ -1,6 +1,6 @@
-package com.example.homework2_todolist.security;
+package com.sparta.homework2_todolist.security;
 
-import com.example.homework2_todolist.jwt.JwtUtil;
+import com.sparta.homework2_todolist.jwt.JwtUtil;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,6 +27,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {

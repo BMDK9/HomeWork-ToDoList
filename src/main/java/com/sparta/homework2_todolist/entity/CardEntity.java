@@ -1,6 +1,6 @@
-package com.example.homework2_todolist.entity;
+package com.sparta.homework2_todolist.entity;
 
-import com.example.homework2_todolist.dto.CardRequestDto;
+import com.sparta.homework2_todolist.dto.CardRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.example.homework2_todolist;
+package com.sparta.homework2_todolist;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

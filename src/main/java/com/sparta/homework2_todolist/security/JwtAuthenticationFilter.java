@@ -1,8 +1,8 @@
-package com.example.homework2_todolist.security;
+package com.sparta.homework2_todolist.security;
 
-import com.example.homework2_todolist.dto.LoginRequestDto;
+import com.sparta.homework2_todolist.dto.LoginRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.example.homework2_todolist.jwt.JwtUtil;
+import com.sparta.homework2_todolist.jwt.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -45,7 +45,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) {
-        String username = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
+        String username = ((UserDetailsImpl)authResult.getPrincipal()).getUsername();
 
         String token = jwtUtil.createToken(username);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);

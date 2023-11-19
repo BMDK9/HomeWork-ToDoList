@@ -1,6 +1,6 @@
-package com.example.homework2_todolist.dto;
+package com.sparta.homework2_todolist.dto;
 
-import com.example.homework2_todolist.entity.CardEntity;
+import com.sparta.homework2_todolist.entity.CardEntity;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package com.example.homework2_todolist.jwt;
+package com.sparta.homework2_todolist.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

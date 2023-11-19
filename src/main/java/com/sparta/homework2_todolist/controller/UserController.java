@@ -1,7 +1,7 @@
-package com.example.homework2_todolist.controller;
+package com.sparta.homework2_todolist.controller;
 
-import com.example.homework2_todolist.service.UserService;
-import com.example.homework2_todolist.dto.SignupRequestDto;
+import com.sparta.homework2_todolist.service.UserService;
+import com.sparta.homework2_todolist.dto.SignupRequestDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

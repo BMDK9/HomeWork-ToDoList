@@ -1,4 +1,4 @@
-package com.example.homework2_todolist;
+package com.sparta.homework2_todolist;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

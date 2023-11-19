@@ -1,6 +1,6 @@
-package com.example.homework2_todolist.repository;
+package com.sparta.homework2_todolist.repository;
 
-import com.example.homework2_todolist.entity.CardEntity;
+import com.sparta.homework2_todolist.entity.CardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

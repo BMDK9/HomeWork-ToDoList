@@ -1,13 +1,7 @@
-package com.example.homework2_todolist.security;
+package com.sparta.homework2_todolist.security;
 
-import com.example.homework2_todolist.entity.UserEntity;
-import com.example.homework2_todolist.entity.UserRoleEnum;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.sparta.homework2_todolist.entity.UserEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
 
@@ -29,18 +23,6 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return user.getUsername();
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        UserRoleEnum role = user.getRole();
-        String authority = role.getAuthority();
-
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(simpleGrantedAuthority);
-
-        return authorities;
     }
 
     @Override

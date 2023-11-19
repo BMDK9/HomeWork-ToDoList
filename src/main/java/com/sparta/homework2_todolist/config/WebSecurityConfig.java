@@ -1,9 +1,9 @@
-package com.example.homework2_todolist.config;
+package com.sparta.homework2_todolist.config;
 
-import com.example.homework2_todolist.security.JwtAuthenticationFilter;
-import com.example.homework2_todolist.security.JwtAuthorizationFilter;
-import com.example.homework2_todolist.jwt.JwtUtil;
-import com.example.homework2_todolist.security.UserDetailsServiceImpl;
+import com.sparta.homework2_todolist.jwt.JwtUtil;
+import com.sparta.homework2_todolist.security.JwtAuthenticationFilter;
+import com.sparta.homework2_todolist.security.JwtAuthorizationFilter;
+import com.sparta.homework2_todolist.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;

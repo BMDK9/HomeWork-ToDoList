@@ -1,7 +1,7 @@
-package com.example.homework2_todolist.security;
+package com.sparta.homework2_todolist.security;
 
-import com.example.homework2_todolist.entity.UserEntity;
-import com.example.homework2_todolist.repository.UserRepository;
+import com.sparta.homework2_todolist.entity.UserEntity;
+import com.sparta.homework2_todolist.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

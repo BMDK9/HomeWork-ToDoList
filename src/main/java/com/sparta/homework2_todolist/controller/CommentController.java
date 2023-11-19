@@ -1,4 +1,4 @@
-package com.example.homework2_todolist.controller;
+package com.sparta.homework2_todolist.controller;
 
 public class CommentController {
 }
