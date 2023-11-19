@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserEntity {
+public class UserEntity extends TimeEntity {
 
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -24,7 +24,7 @@ public class UserEntity {
 
     @Builder
     public UserEntity(Long userId, String username, String password) {
-        this.userId = userId;
+        this.id = userId;
         this.username = username;
         this.password = password;
     }

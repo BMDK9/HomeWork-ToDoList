@@ -14,22 +14,27 @@ public class CardEntity extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cardId;
+    private Long id;
 
     @Column(nullable = false)
     private String title;
+
     @Column(nullable = false, length = 20)
     private String author;
-//    @Column(nullable = false)
-//    private String password;
+
     @Column(nullable = false, length = 500)
     private String contents;
-
 // ================================================= 7
-    public CardEntity(CardRequestDto cardRequestDto) {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity userEntity;
+
+    public CardEntity(CardRequestDto cardRequestDto, UserEntity userEntity) {
         this.title = cardRequestDto.getTitle();
         this.author = cardRequestDto.getAuthor();
         this.contents = cardRequestDto.getContent();
+        this.userEntity = userEntity;
 
 //        ============================================ 8
     }
