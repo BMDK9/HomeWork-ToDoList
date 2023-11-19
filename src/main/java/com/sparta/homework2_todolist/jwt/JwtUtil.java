@@ -42,6 +42,7 @@ public class JwtUtil {
 
         return BEARER_PREFIX +
             Jwts.builder()
+                .claim(AUTHORIZATION_KEY, username)
                 .setSubject(username) // 사용자 식별자값(ID)
                 .setExpiration(new Date(date.getTime() + TOKEN_TIME)) // 만료 시간
                 .setIssuedAt(date) // 발급일

@@ -17,7 +17,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void signup (SignupRequestDto signupRequestDto) {
+    public void signup(SignupRequestDto signupRequestDto) {
         String username = signupRequestDto.getUsername();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
 
@@ -25,5 +25,12 @@ public class UserService {
         if (checkUsername.isPresent()) {
             throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
         }
+
+        UserEntity userEntity = UserEntity.builder()
+            .username(username)
+            .password(password)
+            .build();
+
+        userRepository.save(userEntity);
     }
 }

@@ -50,7 +50,7 @@ public class CardService {
 //        if (!cardEntity.getPassword().equals(cardRequestDto.getPassword())) {
 //            throw new NullPointerException("비밀번호가 일치하지 않습니다.");
 //        }
-//        cardEntity.update(cardRequestDto);
+        cardEntity.update(cardRequestDto);
 
         return new CardResponseDto(cardEntity);
     }

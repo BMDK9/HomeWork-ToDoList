@@ -15,7 +15,6 @@ spring:
         use_sql_comments: true
 
 jwt:
-  header: Authorization
-  secret: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzcGFydGFfc3ByaW5nSG9tZVdvcmsiLCJuYW1lIjoiaG93Y2FuSWRvIn0.eUYEDgksmc8dXDKJWJL8Vl7q2oCRgQEAXjil3yfDSXM
-# {"alg": "HS256", "typ": "JWT"} {"sub": "sparta_springHomeWork", "name": "howcanIdo"}
+  secret:
+    key: 7LWc7KSA7JiB7J6F64uI64ukLuy1nOykgOyYgeyeheuLiOuLpC4=
 #      ================================================== 1
