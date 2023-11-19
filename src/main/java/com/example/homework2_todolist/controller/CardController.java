@@ -1,7 +1,7 @@
 package com.example.homework2_todolist.controller;
 
-import com.example.homework2_todolist.dto.RequestDto;
-import com.example.homework2_todolist.dto.ResponseDto;
+import com.example.homework2_todolist.dto.CardRequestDto;
+import com.example.homework2_todolist.dto.CardResponseDto;
 import com.example.homework2_todolist.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,27 +19,27 @@ public class CardController {
     // ==================================================== 4
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseDto addToDo(@RequestBody RequestDto requestDto) {
-// =================================================================== 3(public void) ,  5(public ResponseDto)
-        ResponseDto responseDto = cardService.addToDo(requestDto);
-        return responseDto;
+    public CardResponseDto addToDo(@RequestBody CardRequestDto cardRequestDto) {
+// =================================================================== 3(public void) ,  5(public CardResponseDto)
+        CardResponseDto cardResponseDto = cardService.addToDo(cardRequestDto);
+        return cardResponseDto;
 //===================================================================== 6
 
     }
 
     @GetMapping("/{cardId}")
-    public ResponseDto getCard (@PathVariable Long cardId) {
+    public CardResponseDto getCard (@PathVariable Long cardId) {
         return cardService.getCard(cardId);
     }
 
     @GetMapping()
-    public List<ResponseDto> getPosts () {
+    public List<CardResponseDto> getPosts () {
         return cardService.getCard();
     }
 
     @PatchMapping("/{cardId}")
-    public ResponseDto updateCard(@PathVariable Long cardId,
-                                  @RequestBody RequestDto requestDto) {
-        return cardService.updateCard(cardId, requestDto);
+    public CardResponseDto updateCard(@PathVariable Long cardId,
+                                      @RequestBody CardRequestDto cardRequestDto) {
+        return cardService.updateCard(cardId, cardRequestDto);
     }
 }

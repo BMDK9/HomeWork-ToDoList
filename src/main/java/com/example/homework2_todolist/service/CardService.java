@@ -1,7 +1,7 @@
 package com.example.homework2_todolist.service;
 
-import com.example.homework2_todolist.dto.RequestDto;
-import com.example.homework2_todolist.dto.ResponseDto;
+import com.example.homework2_todolist.dto.CardRequestDto;
+import com.example.homework2_todolist.dto.CardResponseDto;
 import com.example.homework2_todolist.entity.CardEntity;
 import com.example.homework2_todolist.repository.CardJpaRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,40 +18,41 @@ public class CardService {
     private final CardJpaRepository cardJpaRepository;
     //================================================ 9
 
-    public ResponseDto addToDo(RequestDto requestDto) {
+    public CardResponseDto addToDo(CardRequestDto cardRequestDto) {
 // ==================================================== 4
         //Dto -> entity
-        CardEntity cardEntity = new CardEntity(requestDto);
+        CardEntity cardEntity = new CardEntity(cardRequestDto);
 //         =============================================== 8
         CardEntity savePost = cardJpaRepository.save(cardEntity);
 //        ===================================== 9
-        return new ResponseDto(savePost);
+        return new CardResponseDto(savePost);
 //        ===================================== 10
     }
 
-    public ResponseDto getCard(Long cardId) {
+    public CardResponseDto getCard(Long cardId) {
         CardEntity cardEntity = getCardEntity(cardId);
 
-        return new ResponseDto(cardEntity);
+        return new CardResponseDto(cardEntity);
     }
 
 
-    public List<ResponseDto> getCard() {
+    public List<CardResponseDto> getCard() {
         return cardJpaRepository.findAllByOrderByCreatedAtDesc().stream()
-            .map(ResponseDto::new)
+            .map(CardResponseDto::new)
             .collect(Collectors.toList());
     }
 
     @Transactional
-    public ResponseDto updateCard(Long cardId, RequestDto requestDto) {
+    public CardResponseDto updateCard(Long cardId, CardRequestDto cardRequestDto) {
         CardEntity cardEntity = getCardEntity(cardId);
 
-        if (!cardEntity.getPassword().equals(requestDto.getPassword())) {
-            throw new NullPointerException("비밀번호가 일치하지 않습니다.");
-        }
-        cardEntity.update(requestDto);
+//      비밀번호가 아니라 토큰검사로? ID로?
+//        if (!cardEntity.getPassword().equals(cardRequestDto.getPassword())) {
+//            throw new NullPointerException("비밀번호가 일치하지 않습니다.");
+//        }
+//        cardEntity.update(cardRequestDto);
 
-        return new ResponseDto(cardEntity);
+        return new CardResponseDto(cardEntity);
     }
     private CardEntity getCardEntity(Long cardId) {
         return cardJpaRepository.findById(cardId)
