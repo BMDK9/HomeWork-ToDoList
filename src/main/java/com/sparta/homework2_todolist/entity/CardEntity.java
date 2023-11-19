@@ -19,12 +19,12 @@ public class CardEntity extends TimeEntity {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, length = 20)
-    private String author;
-
     @Column(nullable = false, length = 500)
     private String contents;
 // ================================================= 7
+
+    @Column(nullable = false)
+    private boolean done;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -32,16 +32,19 @@ public class CardEntity extends TimeEntity {
 
     public CardEntity(CardRequestDto cardRequestDto, UserEntity userEntity) {
         this.title = cardRequestDto.getTitle();
-        this.author = cardRequestDto.getAuthor();
         this.contents = cardRequestDto.getContent();
         this.userEntity = userEntity;
+        this.done = false;
 
 //        ============================================ 8
     }
 
     public void update(CardRequestDto cardRequestDto) {
         this.title = cardRequestDto.getTitle();
-        this.author = cardRequestDto.getAuthor();
         this.contents = cardRequestDto.getContent();
+    }
+
+    public void changeStatus () {
+        done = !done;
     }
 }

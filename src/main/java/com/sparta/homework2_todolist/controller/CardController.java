@@ -24,21 +24,19 @@ public class CardController {
     public CardResponseDto addToDo(@RequestBody CardRequestDto cardRequestDto,
                                    @AuthenticationPrincipal UserDetailsImpl userDetails) {
 // =================================================================== 3(public void) ,  5(public CardResponseDto)
-        CardResponseDto cardResponseDto = cardService.addToDo(cardRequestDto, userDetails.getUser());
-        return cardResponseDto;
+        return cardService.addToDo(cardRequestDto, userDetails.getUser());
 //===================================================================== 6
 
     }
 
     @GetMapping("/{cardId}")
-    public CardResponseDto getCard (@PathVariable Long cardId,
-                                    @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return cardService.getCard(cardId, userDetails.getUser());
+    public CardResponseDto getCard (@PathVariable Long cardId) {
+        return cardService.getCard(cardId);
     }
 
-    @GetMapping()
-    public List<CardResponseDto> getCards (@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return cardService.getCards(userDetails.getUser());
+    @GetMapping
+    public List<CardResponseDto> getCards () {
+        return cardService.getCards();
     }
 
     @PatchMapping("/{cardId}")
@@ -46,5 +44,11 @@ public class CardController {
                                       @RequestBody CardRequestDto cardRequestDto,
                                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return cardService.updateCard(cardId, cardRequestDto, userDetails.getUser());
+    }
+
+    @PatchMapping("/change/{cardId}")
+    public CardResponseDto changeCardStatus(@PathVariable Long cardId,
+                                            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return cardService.changeCardStatus(cardId, userDetails.getUser());
     }
 }

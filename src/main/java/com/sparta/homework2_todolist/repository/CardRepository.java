@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CardJpaRepository extends JpaRepository<CardEntity, Long> {
+public interface CardRepository extends JpaRepository<CardEntity, Long> {
     List<CardEntity> findAllByOrderByCreatedAtDesc();
 }
 //================================================================= 9
