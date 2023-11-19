@@ -24,13 +24,4 @@ public class UserController {
 
         return ResponseEntity.ok(CommonCode.OK.getMessage());
     }
-
-    // 관리자인지 확인하는거 같은데 이게 필요한건가???
-//    @GetMapping("/user-info")
-//    @ResponseBody
-//    public UserInfoDto getUserInfo (@AuthenricaionPrincipal UserDetailsImpl userDetails) {
-//        String username = userDetails.getUser().getUsername();
-//
-//        return new UserInfoDto()
-//    }
 }
