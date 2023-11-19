@@ -7,13 +7,20 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table
+@Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CommentEntity {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long commentId;
+    private Long userId;
 
-    private String CommentContent;
+    @Column(nullable = false, unique = true)
+    private String username;
+    @Column(nullable = false)
+    private String password;
+
+    public UserRoleEnum getRole() {
+        return null;
+    }
 }

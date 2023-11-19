@@ -1,7 +1,7 @@
 package com.example.homework2_todolist.service;
 
-import com.example.homework2_todolist.dto.CardRequestDto;
 import com.example.homework2_todolist.dto.CardResponseDto;
+import com.example.homework2_todolist.dto.CardRequestDto;
 import com.example.homework2_todolist.entity.CardEntity;
 import com.example.homework2_todolist.repository.CardJpaRepository;
 import lombok.RequiredArgsConstructor;
