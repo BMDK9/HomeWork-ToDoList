@@ -50,7 +50,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 return;
             }
         }
-        log.warn("살려줘필터4444");
+        log.warn("토큰 검사");
         filterChain.doFilter(req, res);
     }
 
