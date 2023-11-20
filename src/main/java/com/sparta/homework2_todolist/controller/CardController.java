@@ -2,10 +2,12 @@ package com.sparta.homework2_todolist.controller;
 
 import com.sparta.homework2_todolist.dto.CardRequestDto;
 import com.sparta.homework2_todolist.dto.CardResponseDto;
+import com.sparta.homework2_todolist.response.CommonMsg;
 import com.sparta.homework2_todolist.security.UserDetailsImpl;
 import com.sparta.homework2_todolist.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,39 +22,47 @@ public class CardController {
 
     // ==================================================== 4
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public CardResponseDto addToDo(@RequestBody CardRequestDto cardRequestDto,
-                                   @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public ResponseEntity<String> addToDo(@RequestBody CardRequestDto cardRequestDto,
+                                          @AuthenticationPrincipal UserDetailsImpl userDetails) {
 // =================================================================== 3(public void) ,  5(public CardResponseDto)
-        return cardService.addToDo(cardRequestDto, userDetails.getUser());
+       cardService.addToDo(cardRequestDto, userDetails.getUser());
+
+       return ResponseEntity.status(HttpStatus.CREATED).body(CommonMsg.OK_ADDCARD.getMessage());
 //===================================================================== 6
 
     }
 
     @GetMapping("/{cardId}")
+    @ResponseStatus(HttpStatus.OK)
     public CardResponseDto getCard(@PathVariable Long cardId) {
+
         return cardService.getCard(cardId);
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<CardResponseDto> getCards(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return cardService.getCards(userDetails.getUser());
     }
 
     @PatchMapping("/{cardId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public CardResponseDto updateCard(@PathVariable Long cardId,
                                       @RequestBody CardRequestDto cardRequestDto,
                                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return cardService.updateCard(cardId, cardRequestDto, userDetails.getUser());
+
     }
 
     @PatchMapping("/change/{cardId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public CardResponseDto changeCardStatus(@PathVariable Long cardId,
                                             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return cardService.changeCardStatus(cardId, userDetails.getUser());
     }
 
     @PatchMapping("/hide/{cardId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public CardResponseDto concealCard(@PathVariable Long cardId,
                                        @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return cardService.concealCard(cardId, userDetails.getUser());
