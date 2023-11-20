@@ -1,5 +1,7 @@
 package com.sparta.homework2_todolist.service;
 
+import com.sparta.homework2_todolist.controller.exception.CardNoAuthorityException;
+import com.sparta.homework2_todolist.controller.exception.CardNotFoundException;
 import com.sparta.homework2_todolist.dto.CardRequestDto;
 import com.sparta.homework2_todolist.dto.CardResponseDto;
 import com.sparta.homework2_todolist.entity.Card;
@@ -77,14 +79,14 @@ public class CardService {
         Card card = getCardEntity(cardId);
 
         if (!card.getUser().getUsername().equals(user.getUsername())) {
-            throw new IllegalArgumentException("수정 권한이 없습니다.");
+            throw new CardNoAuthorityException("수정 권한이 없습니다.");
         }
         return card;
     }
 
     private Card getCardEntity(Long cardId) {
         return cardRepository.findById(cardId)
-            .orElseThrow(() -> new NullPointerException("해당 카드는 없습니다."));
+            .orElseThrow(() -> new CardNotFoundException("해당 카드는 없습니다."));
     }
 
 }
