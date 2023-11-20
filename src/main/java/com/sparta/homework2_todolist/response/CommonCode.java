@@ -16,6 +16,7 @@ public enum CommonCode {
 
     private final Integer code;
 
+
     CommonCode(String message, Integer code) {
         this.message = message;
         this.code = code;
