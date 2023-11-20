@@ -1,6 +1,6 @@
 package com.sparta.homework2_todolist.dto;
 
-import com.sparta.homework2_todolist.entity.CardEntity;
+import com.sparta.homework2_todolist.entity.Card;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,7 @@ public record CardResponseDto(
     boolean hidden,
     LocalDateTime createdAt
 ) {
-    public CardResponseDto(CardEntity saveCard) {
+    public CardResponseDto(Card saveCard) {
         this(saveCard.getTitle(),
             saveCard.getContents(),
             saveCard.isDone(),

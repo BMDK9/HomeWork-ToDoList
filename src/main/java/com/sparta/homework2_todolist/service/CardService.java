@@ -2,12 +2,11 @@ package com.sparta.homework2_todolist.service;
 
 import com.sparta.homework2_todolist.dto.CardRequestDto;
 import com.sparta.homework2_todolist.dto.CardResponseDto;
-import com.sparta.homework2_todolist.entity.CardEntity;
-import com.sparta.homework2_todolist.entity.UserEntity;
+import com.sparta.homework2_todolist.entity.Card;
+import com.sparta.homework2_todolist.entity.User;
 import com.sparta.homework2_todolist.repository.CardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,69 +20,69 @@ public class CardService {
     private final CardRepository cardRepository;
     //================================================ 9
 
-    public CardResponseDto addToDo(CardRequestDto cardRequestDto, UserEntity userEntity) {
+    public CardResponseDto addToDo(CardRequestDto cardRequestDto, User user) {
 // ==================================================== 4
         //Dto -> entity
-        CardEntity cardEntity = new CardEntity(cardRequestDto, userEntity);
+        Card card = new Card(cardRequestDto, user);
 //         =============================================== 8
-        CardEntity savePost = cardRepository.save(cardEntity);
+        Card savePost = cardRepository.save(card);
 //        ===================================== 9
         return new CardResponseDto(savePost);
 //        ===================================== 10
     }
 
     public CardResponseDto getCard(Long cardId) {
-        CardEntity cardEntity = getCardEntity(cardId);
-        return new CardResponseDto(cardEntity);
+        Card card = getCardEntity(cardId);
+        return new CardResponseDto(card);
     }
 
 
-    public List<CardResponseDto> getCards(UserEntity user) {
+    public List<CardResponseDto> getCards(User user) {
 
         return cardRepository.findAllByOrderByCreatedAtDesc().stream()
-            .filter(isU -> Objects.equals(isU.getUserEntity().getId(), user.getId()) || !isU.isHidden())
+            .filter(isU -> Objects.equals(isU.getUser().getId(), user.getId()) || !isU.isHidden())
             .map(CardResponseDto::new)
             .collect(Collectors.toList());
 
     }
 
     @Transactional
-    public CardResponseDto updateCard(Long cardId, CardRequestDto cardRequestDto, UserEntity userEntity) {
-        CardEntity cardEntity = checkAuthority(cardId, userEntity);
+    public CardResponseDto updateCard(Long cardId, CardRequestDto cardRequestDto, User user) {
+        Card card = checkAuthority(cardId, user);
 
-        cardEntity.update(cardRequestDto);
+        card.update(cardRequestDto);
 
-        return new CardResponseDto(cardEntity);
+        return new CardResponseDto(card);
     }
 
     @Transactional
-    public CardResponseDto changeCardStatus(Long cardId, UserEntity userEntity) {
-        CardEntity cardEntity = checkAuthority(cardId, userEntity);
+    public CardResponseDto changeCardStatus(Long cardId, User user) {
+        Card card = checkAuthority(cardId, user);
 
-        cardEntity.changeStatus();  // 완료 여부 바꿈
+        card.changeStatus();  // 완료 여부 바꿈
 
-        return new CardResponseDto(cardEntity);
+        return new CardResponseDto(card);
     }
 
     @Transactional
-    public CardResponseDto concealCard(Long cardId, UserEntity userEntity) {
-        CardEntity cardEntity = checkAuthority(cardId, userEntity);
+    public CardResponseDto concealCard(Long cardId, User user) {
+        Card card = checkAuthority(cardId, user);
 
-        cardEntity.hideCard();      // 숨김 여부 바굼
+        card.hideCard();      // 숨김 여부 바굼
 
-        return new CardResponseDto(cardEntity);
+        return new CardResponseDto(card);
     }
 
-    private CardEntity checkAuthority(Long cardId, UserEntity userEntity) {
-        CardEntity cardEntity = getCardEntity(cardId);
+    private Card checkAuthority(Long cardId, User user) {
+        Card card = getCardEntity(cardId);
 
-        if (!cardEntity.getUserEntity().getUsername().equals(userEntity.getUsername())) {
+        if (!card.getUser().getUsername().equals(user.getUsername())) {
             throw new IllegalArgumentException("수정 권한이 없습니다.");
         }
-        return cardEntity;
+        return card;
     }
 
-    private CardEntity getCardEntity(Long cardId) {
+    private Card getCardEntity(Long cardId) {
         return cardRepository.findById(cardId)
             .orElseThrow(() -> new NullPointerException("해당 카드는 없습니다."));
     }

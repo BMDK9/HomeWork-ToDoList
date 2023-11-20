@@ -6,13 +6,17 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Entity
 @Table(name = "card")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CardEntity extends TimeEntity {
+public class Card extends TimeEntity {
 
     @Id
+    @Column(name = "card_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -31,12 +35,15 @@ public class CardEntity extends TimeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity userEntity;
+    private User user;
 
-    public CardEntity(CardRequestDto cardRequestDto, UserEntity userEntity) {
+    @OneToMany(mappedBy = "card")
+    private List<Comment> commentEntities = new ArrayList<>();
+
+    public Card(CardRequestDto cardRequestDto, User user) {
         this.title = cardRequestDto.getTitle();
         this.contents = cardRequestDto.getContent();
-        this.userEntity = userEntity;
+        this.user = user;
         this.done = false;
         this.hidden = false;
 

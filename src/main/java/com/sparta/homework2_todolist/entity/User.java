@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserEntity extends TimeEntity {
+public class User extends TimeEntity {
 
     @Id
     @Column(name = "user_id")
@@ -19,13 +19,15 @@ public class UserEntity extends TimeEntity {
 
     @Column(nullable = false, unique = true)
     private String username;
+
     @Column(nullable = false)
     private String password;
 
     @Builder
-    public UserEntity(Long userId, String username, String password) {
+    public User(Long userId, String username, String password) {
         this.id = userId;
         this.username = username;
         this.password = password;
+
     }
 }

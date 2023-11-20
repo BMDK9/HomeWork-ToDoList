@@ -2,11 +2,9 @@ package com.sparta.homework2_todolist.service;
 
 
 import com.sparta.homework2_todolist.dto.SignupRequestDto;
-import com.sparta.homework2_todolist.entity.UserEntity;
+import com.sparta.homework2_todolist.entity.User;
 import com.sparta.homework2_todolist.repository.UserRepository;
-import com.sparta.homework2_todolist.response.CommonCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +22,16 @@ public class UserService {
         String username = signupRequestDto.getUsername();
         String password = passwordEncoder.encode(signupRequestDto.getPassword());
 
-        Optional<UserEntity> checkUsername = userRepository.findByUsername(username);
+        Optional<User> checkUsername = userRepository.findByUsername(username);
         if (checkUsername.isPresent()) {
             throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
         }
 
-        UserEntity userEntity = UserEntity.builder()
+        User user = User.builder()
             .username(username)
             .password(password)
             .build();
 
-        userRepository.save(userEntity);
+        userRepository.save(user);
     }
 }

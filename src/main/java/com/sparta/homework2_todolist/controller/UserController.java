@@ -22,6 +22,6 @@ public class UserController {
 
         userService.signup(signupRequestDto);
 
-        return ResponseEntity.ok(CommonCode.OK.getMessage());
+        return ResponseEntity.status(HttpStatus.CREATED).body(CommonCode.OK.getMessage());
     }
 }

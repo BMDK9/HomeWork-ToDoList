@@ -1,6 +1,6 @@
 package com.sparta.homework2_todolist.security;
 
-import com.sparta.homework2_todolist.entity.UserEntity;
+import com.sparta.homework2_todolist.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,13 +10,13 @@ import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private final UserEntity user;
+    private final User user;
 
-    public UserDetailsImpl(UserEntity user) {
+    public UserDetailsImpl(User user) {
         this.user = user;
     }
 
-    public UserEntity getUser() {
+    public User getUser() {
         return user;
     }
 
