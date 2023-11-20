@@ -5,7 +5,7 @@ import com.sparta.homework2_todolist.controller.exception.CardNotFoundException;
 import com.sparta.homework2_todolist.dto.CardRequestDto;
 import com.sparta.homework2_todolist.dto.CardResponseDto;
 import com.sparta.homework2_todolist.dto.exceprion.ErrorResponseDto;
-import com.sparta.homework2_todolist.response.CommonMsg;
+import com.sparta.homework2_todolist.response.CardNomalMsg;
 import com.sparta.homework2_todolist.security.UserDetailsImpl;
 import com.sparta.homework2_todolist.service.CardService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,7 @@ public class CardController {
 // =================================================================== 3(public void) ,  5(public CardResponseDto)
         cardService.addToDo(cardRequestDto, userDetails.getUser());
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(CommonMsg.OK_ADDCARD.getMessage());
+        return ResponseEntity.status(HttpStatus.CREATED).body(CardNomalMsg.OK_ADDCARD.getMessage());
 //===================================================================== 6
 
     }
@@ -72,14 +72,14 @@ public class CardController {
     }
 
     @ExceptionHandler(CardNotFoundException.class)
-    public ResponseEntity<ErrorResponseDto> NotFoundExceptionHandler(CardNotFoundException ex) {
+    public ResponseEntity<ErrorResponseDto> CardNotFoundExceptionHandler(CardNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
             new ErrorResponseDto(HttpStatus.NOT_FOUND.value(), ex.getMessage())
         );
     }
 
     @ExceptionHandler(CardNoAuthorityException.class)
-    public ResponseEntity<ErrorResponseDto> NoAuthorityExceptionHandler(CardNoAuthorityException ex) {
+    public ResponseEntity<ErrorResponseDto> CardNoAuthorityExceptionHandler(CardNoAuthorityException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
             new ErrorResponseDto(HttpStatus.FORBIDDEN.value(), ex.getMessage())
         );
