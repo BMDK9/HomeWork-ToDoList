@@ -6,4 +6,4 @@ https://documenter.getpostman.com/view/30903657/2s9Ye8gEur
 
 # HomeWork_ToDoList ERD
 
-![ToDoList](https://github.com/BMDK9/HomeWork-ToDoList/assets/144665614/77d4bffa-8508-4d00-a710-7ac24567169f)
+![ToDoList ERD](https://github.com/BMDK9/HomeWork-ToDoList/assets/144665614/3b24d441-03c8-49cf-8a24-823e3ac25fd8)
