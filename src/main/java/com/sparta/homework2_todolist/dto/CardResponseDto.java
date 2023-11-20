@@ -6,15 +6,17 @@ import java.time.LocalDateTime;
 
 public record CardResponseDto(
 //    ======================================================= 5 , 11 public class -> public record
-     String title,
-     String content,
-     boolean done,
-     LocalDateTime createdAt
+    String title,
+    String content,
+    boolean done,
+    boolean hidden,
+    LocalDateTime createdAt
 ) {
-       public CardResponseDto(CardEntity saveCard) {
+    public CardResponseDto(CardEntity saveCard) {
         this(saveCard.getTitle(),
             saveCard.getContents(),
             saveCard.isDone(),
+            saveCard.isHidden(),
             saveCard.getCreatedAt());
     }
 //    ======================================= 10, 11 this( ); 로 바꿈.

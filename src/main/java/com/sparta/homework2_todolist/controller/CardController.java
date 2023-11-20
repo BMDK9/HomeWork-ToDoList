@@ -30,13 +30,13 @@ public class CardController {
     }
 
     @GetMapping("/{cardId}")
-    public CardResponseDto getCard (@PathVariable Long cardId) {
+    public CardResponseDto getCard(@PathVariable Long cardId) {
         return cardService.getCard(cardId);
     }
 
     @GetMapping
-    public List<CardResponseDto> getCards () {
-        return cardService.getCards();
+    public List<CardResponseDto> getCards(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return cardService.getCards(userDetails.getUser());
     }
 
     @PatchMapping("/{cardId}")
@@ -50,5 +50,11 @@ public class CardController {
     public CardResponseDto changeCardStatus(@PathVariable Long cardId,
                                             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return cardService.changeCardStatus(cardId, userDetails.getUser());
+    }
+
+    @PatchMapping("/hide/{cardId}")
+    public CardResponseDto concealCard(@PathVariable Long cardId,
+                                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return cardService.concealCard(cardId, userDetails.getUser());
     }
 }

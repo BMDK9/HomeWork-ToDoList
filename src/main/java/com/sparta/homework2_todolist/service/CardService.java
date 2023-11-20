@@ -7,9 +7,11 @@ import com.sparta.homework2_todolist.entity.UserEntity;
 import com.sparta.homework2_todolist.repository.CardRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,10 +38,13 @@ public class CardService {
     }
 
 
-    public List<CardResponseDto> getCards() {
+    public List<CardResponseDto> getCards(UserEntity user) {
+
         return cardRepository.findAllByOrderByCreatedAtDesc().stream()
+            .filter(isU -> Objects.equals(isU.getUserEntity().getId(), user.getId()) || !isU.isHidden())
             .map(CardResponseDto::new)
             .collect(Collectors.toList());
+
     }
 
     @Transactional
@@ -55,7 +60,16 @@ public class CardService {
     public CardResponseDto changeCardStatus(Long cardId, UserEntity userEntity) {
         CardEntity cardEntity = checkAuthority(cardId, userEntity);
 
-        cardEntity.changeStatus();
+        cardEntity.changeStatus();  // 완료 여부 바꿈
+
+        return new CardResponseDto(cardEntity);
+    }
+
+    @Transactional
+    public CardResponseDto concealCard(Long cardId, UserEntity userEntity) {
+        CardEntity cardEntity = checkAuthority(cardId, userEntity);
+
+        cardEntity.hideCard();      // 숨김 여부 바굼
 
         return new CardResponseDto(cardEntity);
     }
@@ -73,4 +87,5 @@ public class CardService {
         return cardRepository.findById(cardId)
             .orElseThrow(() -> new NullPointerException("해당 카드는 없습니다."));
     }
+
 }

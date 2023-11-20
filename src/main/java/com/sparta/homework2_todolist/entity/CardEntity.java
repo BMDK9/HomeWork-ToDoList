@@ -26,6 +26,9 @@ public class CardEntity extends TimeEntity {
     @Column(nullable = false)
     private boolean done;
 
+    @Column(nullable = false)
+    private boolean hidden;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity userEntity;
@@ -35,6 +38,7 @@ public class CardEntity extends TimeEntity {
         this.contents = cardRequestDto.getContent();
         this.userEntity = userEntity;
         this.done = false;
+        this.hidden = false;
 
 //        ============================================ 8
     }
@@ -46,5 +50,9 @@ public class CardEntity extends TimeEntity {
 
     public void changeStatus () {
         done = !done;
+    }
+
+    public void hideCard () {
+        hidden = !hidden;
     }
 }
