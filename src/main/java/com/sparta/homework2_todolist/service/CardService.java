@@ -27,9 +27,9 @@ public class CardService {
         //Dto -> entity
         Card card = new Card(cardRequestDto, user);
 //         =============================================== 8
-        Card savePost = cardRepository.save(card);
+        Card saveCard = cardRepository.save(card);
 //        ===================================== 9
-        return new CardResponseDto(savePost);
+        return new CardResponseDto(saveCard);
 //        ===================================== 10
     }
 

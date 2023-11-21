@@ -2,6 +2,7 @@ package com.sparta.homework2_todolist.repository;
 
 import com.sparta.homework2_todolist.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
