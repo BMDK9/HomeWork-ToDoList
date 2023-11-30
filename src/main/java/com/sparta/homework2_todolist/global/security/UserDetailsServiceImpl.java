@@ -1,0 +1,25 @@
+package com.sparta.homework2_todolist.global.security;
+
+import com.sparta.homework2_todolist.domain.users.entity.User;
+import com.sparta.homework2_todolist.domain.users.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class UserDetailsServiceImpl implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("유저 이름 찾기");
+        User user = userRepository.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("Not Found " + username));
+
+        return new UserDetailsImpl(user);
+    }
+}
