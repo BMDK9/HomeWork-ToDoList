@@ -14,8 +14,8 @@ public class CardResponseDto {
 //    ======================================================= 5 , 11 public class -> public record
     private String title;
     private String content;
-    private Boolean isDone;
-    private Boolean isHidden;
+    private boolean isDone;
+    private boolean isHidden;
     private LocalDateTime createdAt;
 
     @Builder
@@ -34,8 +34,8 @@ public class CardResponseDto {
         return CardResponseDto.builder()
             .title(card.getTitle())
             .content(card.getContents())
-            .isDone(card.isDone())
-            .isHidden(card.isHidden())
+            .isDone(card.getIsDone())
+            .isHidden(card.getIsHidden())
             .createdAt(card.getCreatedAt())
             .build();
     }

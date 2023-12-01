@@ -42,9 +42,11 @@ public class CardService {
 //        ===================================== 10
     }
 
-    public CardResponseDto getCard(Long cardId) {
+    public CardResponseDto getCard(Long cardId, User user) {
         Card card = getCardEntity(cardId);
-        checkHidden(card);
+        if (card.getIsHidden() && !card.getId().equals(user.getId())) {
+            throw new CardException(CardErrorCode.HIDDEN_CARDS);
+        };
         return CardResponseDto.of(card);
     }
 
@@ -52,7 +54,7 @@ public class CardService {
     public List<CardResponseDto> getCards(User user) {
 
         return cardRepository.findAllByOrderByCreatedAtDesc().stream()
-            .filter(isU -> Objects.equals(isU.getUser().getId(), user.getId()) || !isU.isHidden())
+            .filter(isU -> Objects.equals(isU.getUser().getId(), user.getId()) || !isU.getIsHidden())
             .map(CardResponseDto::of)
             .collect(Collectors.toList());
 
@@ -85,13 +87,6 @@ public class CardService {
         card.hideCard();      // 숨김 여부 바굼
 
         return CardResponseDto.of(card);
-    }
-
-    private void checkHidden(Card card) {
-
-        if (card.isHidden()) {
-            throw new CardException(CardErrorCode.HIDDEN_CARDS);
-        }
     }
 
     private void checkAuthority(Card card, User user) {

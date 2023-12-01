@@ -27,10 +27,10 @@ public class Card extends TimeEntity {
 // ================================================= 7
 
     @Column(nullable = false)
-    private boolean isDone;
+    private Boolean isDone;
 
     @Column(nullable = false)
-    private boolean isHidden;
+    private Boolean isHidden;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

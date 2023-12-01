@@ -1,6 +1,5 @@
 package com.sparta.homework2_todolist.domain.card.controller;
 
-
 import com.sparta.homework2_todolist.domain.card.dto.CardRequestDto;
 import com.sparta.homework2_todolist.domain.card.dto.CardResponseDto;
 import com.sparta.homework2_todolist.domain.card.service.CardService;
@@ -32,9 +31,10 @@ public class CardController {
     }
 
     @GetMapping("/{cardId}")
-    public CardResponseDto getCard(@PathVariable Long cardId) {
+    public CardResponseDto getCard(@PathVariable Long cardId,
+                                   @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return cardService.getCard(cardId);
+        return cardService.getCard(cardId, userDetails.getUser());
     }
 
     @GetMapping
@@ -49,7 +49,6 @@ public class CardController {
                                       @RequestBody CardRequestDto cardRequestDto,
                                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return cardService.updateCard(cardId, cardRequestDto, userDetails.getUser());
-
     }
 
     @PatchMapping("/change/{cardId}")
