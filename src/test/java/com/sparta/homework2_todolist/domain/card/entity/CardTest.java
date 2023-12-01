@@ -12,7 +12,7 @@ class CardTest {
     Card card;
 
     @Test
-    @DisplayName("카드 업데이트 테스트")
+    @DisplayName("카드 업데이트 정상 작동 테스트")
     void test1 () {
         //given
         Card card = new Card();
@@ -32,7 +32,7 @@ class CardTest {
     }
 
     @Test
-    @DisplayName("카드 완료 처리 테스트")
+    @DisplayName("카드 완료 성공 테스트")
     void test2 () {
         // given
         Card card = Card.builder()
@@ -45,5 +45,21 @@ class CardTest {
         //then
         assertNotNull(card.getIsDone());
         assertEquals(true, card.getIsDone());
+    }
+
+    @Test
+    @DisplayName("카드 숨김 성공 테스트")
+    void test3 () {
+        // given
+        Card card = Card.builder()
+            .isHidden(false)
+            .build();
+
+        //when
+        card.hideCard();
+
+        //then
+        assertNotNull(card.getIsHidden());
+        assertEquals(true, card.getIsHidden());
     }
 }
