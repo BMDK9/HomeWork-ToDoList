@@ -12,7 +12,7 @@ class CardTest {
     Card card;
 
     @Test
-    @DisplayName("카드 업데이트 정상 작동 테스트")
+    @DisplayName("카드 수정 정상 작동 테스트")
     void test1 () {
         //given
         Card card = new Card();
