@@ -14,8 +14,8 @@ public class CardResponseDto {
 //    ======================================================= 5 , 11 public class -> public record
     private String title;
     private String content;
-    private boolean isDone;
-    private boolean isHidden;
+    private Boolean isDone;
+    private Boolean isHidden;
     private LocalDateTime createdAt;
 
     @Builder
