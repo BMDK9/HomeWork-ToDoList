@@ -9,31 +9,30 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 class CardTest {
-    Card card;
 
     @Test
     @DisplayName("카드 수정 정상 작동 테스트")
-    void test1 () {
+    void test1() {
         //given
         Card card = new Card();
-
-        CardRequestDto cardRequestDto = new CardRequestDto();
-        cardRequestDto.setTitle("세터 쓰기 싫은데에");
-        cardRequestDto.setContent("안쓰는 방법 알려줄 사람?");
+        CardRequestDto cardRequestDto = CardRequestDto.builder()
+            .title("Dto에 빌드 만들어도")
+            .content("괜찮은거 맞나?")
+            .build();
 
         //when
-        card.update(cardRequestDto);
+        card.update(cardRequestDto.getTitle(), cardRequestDto.getContent());
 
         //then
         assertNotNull(card.getTitle());
         assertNotNull(card.getContents());
-        assertEquals("세터 쓰기 싫은데에", card.getTitle());
-        assertEquals("안쓰는 방법 알려줄 사람?", card.getContents());
+        assertEquals("Dto에 빌드 만들어도", card.getTitle());
+        assertEquals("괜찮은거 맞나?", card.getContents());
     }
 
     @Test
     @DisplayName("카드 완료 성공 테스트")
-    void test2 () {
+    void test2() {
         // given
         Card card = Card.builder()
             .isDone(false)
@@ -49,7 +48,7 @@ class CardTest {
 
     @Test
     @DisplayName("카드 숨김 성공 테스트")
-    void test3 () {
+    void test3() {
         // given
         Card card = Card.builder()
             .isHidden(false)

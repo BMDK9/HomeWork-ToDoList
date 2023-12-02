@@ -1,6 +1,5 @@
 package com.sparta.homework2_todolist.domain.card.entity;
 
-import com.sparta.homework2_todolist.domain.card.dto.CardRequestDto;
 import com.sparta.homework2_todolist.domain.users.entity.User;
 import com.sparta.homework2_todolist.domain.utills.TimeEntity;
 import jakarta.persistence.*;
@@ -46,9 +45,9 @@ public class Card extends TimeEntity {
 //        ============================================ 8
     }
 
-    public void update(CardRequestDto cardRequestDto) {
-        this.title = cardRequestDto.getTitle();
-        this.contents = cardRequestDto.getContent();
+    public void update(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
     }
 
     public Boolean changeStatus() {
