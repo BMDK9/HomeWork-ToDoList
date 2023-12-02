@@ -27,7 +27,7 @@ public class CardService {
     public CardResponseDto addToDo(CardRequestDto cardRequestDto, User user) {
 // ==================================================== 4
         //Dto -> entity
-        Card saveCard = Card.builder()
+        Card card = Card.builder()
             .title(cardRequestDto.getTitle())
             .contents(cardRequestDto.getContent())
             .user(user)
@@ -36,9 +36,9 @@ public class CardService {
             .build();
 
 //         =============================================== 8
-        cardRepository.save(saveCard);
+        Card savecard = cardRepository.save(card);
 //        ===================================== 9
-        return CardResponseDto.of(saveCard);
+        return CardResponseDto.of(savecard);
 //        ===================================== 10
     }
 
@@ -64,9 +64,15 @@ public class CardService {
     public CardResponseDto updateCard(Long cardId, CardRequestDto cardRequestDto, User user) {
         Card card = getCardEntity(cardId);
         checkAuthority(card, user);
-        card.update(cardRequestDto);
+        card.update(cardRequestDto.getTitle(), cardRequestDto.getContent());
 
         return CardResponseDto.of(card);
+    }
+
+    public void deleteCard(Long cardId, User user) {
+        Card card = getCardEntity(cardId);
+        checkAuthority(card, user);
+        cardRepository.delete(card);
     }
 
     @Transactional
@@ -101,5 +107,4 @@ public class CardService {
         return cardRepository.findById(cardId)
             .orElseThrow(() -> new CardException(CardErrorCode.NOT_FOUNDED_CARD));
     }
-
 }
