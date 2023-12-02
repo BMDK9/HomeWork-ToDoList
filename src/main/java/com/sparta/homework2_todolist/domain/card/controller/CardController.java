@@ -51,6 +51,15 @@ public class CardController {
         return cardService.updateCard(cardId, cardRequestDto, userDetails.getUser());
     }
 
+    @DeleteMapping("/{cardId}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Void> deleteCard(@PathVariable Long cardId,
+                                      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        cardService.deleteCard(cardId, userDetails.getUser());
+
+        return ResponseEntity.noContent().build();
+    }
+
     @PatchMapping("/change/{cardId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public CardResponseDto changeCardStatus(@PathVariable Long cardId,
