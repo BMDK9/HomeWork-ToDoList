@@ -93,14 +93,14 @@ public class CardService {
         return CardResponseDto.of(card);
     }
 
-    public void checkAuthority(Card card, User user) {
+    private void checkAuthority(Card card, User user) {
 
         if (!card.getUser().getUsername().equals(user.getUsername())) {
             throw new CardException(CardErrorCode.NO_AUTHORITY);
         }
     }
 
-    public Card getCardEntity(Long cardId) {
+    private Card getCardEntity(Long cardId) {
 
         return cardRepository.findById(cardId)
             .orElseThrow(() -> new CardException(CardErrorCode.NOT_FOUNDED_CARD));
