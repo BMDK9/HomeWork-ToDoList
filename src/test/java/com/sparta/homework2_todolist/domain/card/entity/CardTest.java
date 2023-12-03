@@ -17,11 +17,11 @@ class CardTest {
         Card card = new Card();
         CardRequestDto cardRequestDto = CardRequestDto.builder()
             .title("Dto에 빌드 만들어도")
-            .content("괜찮은거 맞나?")
+            .contents("괜찮은거 맞나?")
             .build();
 
         //when
-        card.update(cardRequestDto.getTitle(), cardRequestDto.getContent());
+        card.update(cardRequestDto.getTitle(), cardRequestDto.getContents());
 
         //then
         assertNotNull(card.getTitle());
