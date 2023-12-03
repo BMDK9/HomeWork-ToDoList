@@ -29,7 +29,7 @@ public class CardService {
         //Dto -> entity
         Card card = Card.builder()
             .title(cardRequestDto.getTitle())
-            .contents(cardRequestDto.getContent())
+            .contents(cardRequestDto.getContents())
             .user(user)
             .isDone(false)
             .isHidden(false)
@@ -50,21 +50,19 @@ public class CardService {
         return CardResponseDto.of(card);
     }
 
-
     public List<CardResponseDto> getCards(User user) {
 
         return cardRepository.findAllByOrderByCreatedAtDesc().stream()
             .filter(isU -> Objects.equals(isU.getUser().getId(), user.getId()) || !isU.getIsHidden())
             .map(CardResponseDto::of)
             .collect(Collectors.toList());
-
     }
 
     @Transactional
     public CardResponseDto updateCard(Long cardId, CardRequestDto cardRequestDto, User user) {
         Card card = getCardEntity(cardId);
         checkAuthority(card, user);
-        card.update(cardRequestDto.getTitle(), cardRequestDto.getContent());
+        card.update(cardRequestDto.getTitle(), cardRequestDto.getContents());
 
         return CardResponseDto.of(card);
     }
@@ -95,7 +93,7 @@ public class CardService {
         return CardResponseDto.of(card);
     }
 
-    private void checkAuthority(Card card, User user) {
+    public void checkAuthority(Card card, User user) {
 
         if (!card.getUser().getUsername().equals(user.getUsername())) {
             throw new CardException(CardErrorCode.NO_AUTHORITY);

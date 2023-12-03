@@ -13,15 +13,15 @@ import java.time.LocalDateTime;
 public class CardResponseDto {
 //    ======================================================= 5 , 11 public class -> public record
     private String title;
-    private String content;
+    private String contents;
     private Boolean isDone;
     private Boolean isHidden;
     private LocalDateTime createdAt;
 
     @Builder
-    private CardResponseDto(String title, String content, Boolean isDone, Boolean isHidden, LocalDateTime createdAt) {
+    private CardResponseDto(String title, String contents, Boolean isDone, Boolean isHidden, LocalDateTime createdAt) {
         this.title = title;
-        this.content = content;
+        this.contents = contents;
         this.isDone = isDone;
         this.isHidden = isHidden;
         this.createdAt = createdAt;
@@ -33,7 +33,7 @@ public class CardResponseDto {
 
         return CardResponseDto.builder()
             .title(card.getTitle())
-            .content(card.getContents())
+            .contents(card.getContents())
             .isDone(card.getIsDone())
             .isHidden(card.getIsHidden())
             .createdAt(card.getCreatedAt())

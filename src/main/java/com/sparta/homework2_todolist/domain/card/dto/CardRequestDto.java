@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CardRequestDto {
     private String title;
-    private String content;
+    private String contents;
 
     @Builder
-    private CardRequestDto (String title, String content) {
+    private CardRequestDto (String title, String contents) {
         this.title = title;
-        this.content = content;
+        this.contents = contents;
     }
 }
 // ============================================= 3
