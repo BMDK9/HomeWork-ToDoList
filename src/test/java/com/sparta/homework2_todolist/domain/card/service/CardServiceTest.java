@@ -3,23 +3,28 @@ package com.sparta.homework2_todolist.domain.card.service;
 import com.sparta.homework2_todolist.domain.card.dto.CardRequestDto;
 import com.sparta.homework2_todolist.domain.card.dto.CardResponseDto;
 import com.sparta.homework2_todolist.domain.card.entity.Card;
+import com.sparta.homework2_todolist.domain.card.exception.CardErrorCode;
+import com.sparta.homework2_todolist.domain.card.exception.CardException;
 import com.sparta.homework2_todolist.domain.card.repository.CardRepository;
 import com.sparta.homework2_todolist.domain.users.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.groups.Tuple.tuple;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
 class CardServiceTest {
@@ -38,10 +43,10 @@ class CardServiceTest {
 
     @BeforeEach
     void setUp() {
-        user1 = User.builder().userId(1L).username("성훈")
+        user1 = User.builder().userId(1L).username("보라돌이")
             .build();
 
-        user2 = User.builder().userId(2L).username("김성훈")
+        user2 = User.builder().userId(2L).username("뚜비")
             .build();
 
         card1 = Card.builder().title("할일 카드").contents("추가 테스트").user(user1)
@@ -53,11 +58,11 @@ class CardServiceTest {
             .build();
 
         cardRequestDto1 = CardRequestDto.builder()
-            .title("할일 카드").content("추가 테스트")
+            .title("할일 카드").contents("추가 테스트")
             .build();
 
         cardRequestDto2 = CardRequestDto.builder()
-            .title("할일 제목 수정").content("할일 내용 수정")
+            .title("할일 제목 수정").contents("할일 내용 수정")
             .build();
     }
 
@@ -65,13 +70,13 @@ class CardServiceTest {
     @Test
     void addToDo() {
         // given
-        BDDMockito.given(cardRepository.save(any(Card.class))).willReturn(card1);
+        given(cardRepository.save(any(Card.class))).willReturn(card1);
 
         // when
         CardResponseDto result = cardService.addToDo(cardRequestDto1, user1);
 
         // then
-        assertThat(result).extracting("title", "content")
+        assertThat(result).extracting("title", "contents")
             .contains("할일 카드", "추가 테스트");
 
 //        assertEquals(cardRequestDto.getTitle(), result.getTitle());
@@ -82,34 +87,39 @@ class CardServiceTest {
     @Test
     void getCard() {
         // given
-        BDDMockito.given(cardRepository.findById(anyLong())).willReturn(Optional.of(card2));
+        given(cardRepository.findById(anyLong())).willReturn(Optional.of(card2));
 
         // when
         CardResponseDto card = cardService.getCard(2L, user1);
 
         // then
-        assertThat(card).extracting("title", "content", "isDone", "isHidden")
+        assertThat(card).extracting("title", "contents", "isDone", "isHidden")
             .contains("제목 제목", "내용 내용", false, false);
     }
 
-//    @DisplayName("할일 카드 목록 조회")
-//    @Test
-//    void getCards() {
-//        // given
-//        BDDMockito.given(cardRepository.findAllByOrderByCreatedAtDesc()).willReturn(List.of(card1, card2));
-//
-//        // when
-//        HashMap<String, List<CardResponseDto>> result = (HashMap<String, List<CardResponseDto>>) cardService.getCards(user1);
-//
-//        // then
-//
-//    }
+    @DisplayName("할일 카드 목록 조회")
+    @Test
+    void getCards() {
+        // given
+        given(cardRepository.findAllByOrderByCreatedAtDesc()).willReturn(List.of(card1, card2));
+
+        // when
+        List<CardResponseDto> cards = cardService.getCards(user1);
+
+        // then
+        assertThat(cards).hasSize(2);
+        System.out.println(cards.get(0).getTitle());
+        assertThat(cards).extracting("title", "contents", "isDone", "isHidden")
+            .contains(
+                tuple("할일 카드", "추가 테스트", false, false),
+                tuple("제목 제목", "내용 내용", false, false));
+    }
 
     @DisplayName("할일 카드 수정 테스트")
     @Test
     void updateCard() {
         // given
-        BDDMockito.given(cardRepository.findById(anyLong())).willReturn(Optional.of(card2));
+        given(cardRepository.findById(anyLong())).willReturn(Optional.of(card2));
 
         // when
         CardResponseDto result = cardService.updateCard(2L, cardRequestDto2, user2);
@@ -123,7 +133,7 @@ class CardServiceTest {
     @Test
     void deleteCard() {
         // given
-        BDDMockito.given(cardRepository.findById(anyLong())).willReturn(Optional.of(card2));
+        given(cardRepository.findById(anyLong())).willReturn(Optional.of(card2));
 
         // when
         cardService.deleteCard(1L, user2);
@@ -136,7 +146,7 @@ class CardServiceTest {
     @Test
     void changeCardStatus() {
         // given
-        BDDMockito.given(cardRepository.findById(anyLong())).willReturn(Optional.ofNullable(card1));
+        given(cardRepository.findById(anyLong())).willReturn(Optional.ofNullable(card1));
 
         // when
         CardResponseDto result = cardService.changeCardStatus(1L, user1);
@@ -149,7 +159,7 @@ class CardServiceTest {
     @Test
     void concealCard() {
         // given
-        BDDMockito.given(cardRepository.findById(anyLong())).willReturn(Optional.ofNullable(card2));
+        given(cardRepository.findById(anyLong())).willReturn(Optional.ofNullable(card2));
 
         // when
         CardResponseDto result = cardService.concealCard(2L, user2);
@@ -158,4 +168,11 @@ class CardServiceTest {
         assertThat(result.getIsHidden()).isEqualTo(true);
     }
 
+    @DisplayName("카드 권한 심사")
+    @Test
+    void checkAuthority() {
+        // when, then
+        assertThatThrownBy(() -> cardService.checkAuthority(card1, user2))
+            .isInstanceOf(CardException.class).hasMessage(CardErrorCode.NO_AUTHORITY.getMessage());
+    }
 }
