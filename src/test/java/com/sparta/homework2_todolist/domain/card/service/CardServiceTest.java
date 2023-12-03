@@ -175,4 +175,13 @@ class CardServiceTest {
         assertThatThrownBy(() -> cardService.checkAuthority(card1, user2))
             .isInstanceOf(CardException.class).hasMessage(CardErrorCode.NO_AUTHORITY.getMessage());
     }
+
+    @DisplayName("카드 유무 확인")
+    @Test
+    void getCardEntity() {
+        given(cardRepository.findById(anyLong())).willReturn(Optional.empty());
+        // when, then
+        assertThatThrownBy(() -> cardService.getCardEntity(1L))
+            .isInstanceOf(CardException.class).hasMessage(CardErrorCode.NOT_FOUNDED_CARD.getMessage());
+    }
 }

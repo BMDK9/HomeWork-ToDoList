@@ -100,7 +100,7 @@ public class CardService {
         }
     }
 
-    private Card getCardEntity(Long cardId) {
+    public Card getCardEntity(Long cardId) {
 
         return cardRepository.findById(cardId)
             .orElseThrow(() -> new CardException(CardErrorCode.NOT_FOUNDED_CARD));
