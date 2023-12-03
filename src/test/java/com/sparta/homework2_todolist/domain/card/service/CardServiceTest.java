@@ -92,6 +92,19 @@ class CardServiceTest {
             .contains("제목 제목", "내용 내용", false, false);
     }
 
+//    @DisplayName("할일 카드 목록 조회")
+//    @Test
+//    void getCards() {
+//        // given
+//        BDDMockito.given(cardRepository.findAllByOrderByCreatedAtDesc()).willReturn(List.of(card1, card2));
+//
+//        // when
+//        HashMap<String, List<CardResponseDto>> result = (HashMap<String, List<CardResponseDto>>) cardService.getCards(user1);
+//
+//        // then
+//
+//    }
+
     @DisplayName("할일 카드 수정 테스트")
     @Test
     void updateCard() {
@@ -118,4 +131,31 @@ class CardServiceTest {
         // then
         Mockito.verify(cardRepository, Mockito.times(1)).delete(any(Card.class));
     }
+
+    @DisplayName("카드 완료 테스트")
+    @Test
+    void changeCardStatus() {
+        // given
+        BDDMockito.given(cardRepository.findById(anyLong())).willReturn(Optional.ofNullable(card1));
+
+        // when
+        CardResponseDto result = cardService.changeCardStatus(1L, user1);
+
+        // then
+        assertThat(result.getIsDone()).isEqualTo(true);
+    }
+
+    @DisplayName("카드 숨김 테스트")
+    @Test
+    void concealCard() {
+        // given
+        BDDMockito.given(cardRepository.findById(anyLong())).willReturn(Optional.ofNullable(card2));
+
+        // when
+        CardResponseDto result = cardService.concealCard(2L, user2);
+
+        // then
+        assertThat(result.getIsHidden()).isEqualTo(true);
+    }
+
 }
