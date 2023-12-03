@@ -28,6 +28,7 @@ class CardTest {
         assertNotNull(card.getContents());
         assertEquals("Dto에 빌드 만들어도", card.getTitle());
         assertEquals("괜찮은거 맞나?", card.getContents());
+        org.assertj.core.api.Assertions.assertThat(card.getContents()).isEqualTo("괜찮은거 맞나?");
     }
 
     @Test
