@@ -5,8 +5,9 @@
 https://documenter.getpostman.com/view/30903657/2s9Ye8gEur
 
 # HomeWork_ToDoList ERD
+https://drawsql.app/teams/-713/diagrams/copy-of-todo
+![todo](https://github.com/BMDK9/HomeWork-ToDoList/assets/144665614/e7397b75-ee27-409d-83b3-e4a97476e99b)
 
-![ToDoList ERD](https://github.com/BMDK9/HomeWork-ToDoList/assets/144665614/3b24d441-03c8-49cf-8a24-823e3ac25fd8)
 
 # 디렉토리 구조
 ```bash
