@@ -19,7 +19,7 @@ import java.security.Principal;
 
 @WebMvcTest(controllers =
     {CardController.class,
-     UserController.class
+        UserController.class
     }, excludeFilters = {
     @ComponentScan.Filter(
         type = FilterType.ASSIGNABLE_TYPE,
