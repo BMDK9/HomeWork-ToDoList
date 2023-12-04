@@ -36,7 +36,8 @@ public class Card extends TimeEntity {
     private User user;
 
     @Builder
-    private Card(String title, String contents, User user, Boolean isDone, Boolean isHidden) {
+    private Card(Long id, String title, String contents, User user, Boolean isDone, Boolean isHidden) {
+        this.id = id;
         this.title = title;
         this.contents = contents;
         this.user = user;
@@ -50,13 +51,11 @@ public class Card extends TimeEntity {
         this.contents = contents;
     }
 
-    public Boolean changeStatus() {
+    public void changeStatus() {
         isDone = !isDone;
-        return this.isDone;
     }
 
-    public Boolean hideCard() {
+    public void hideCard() {
         isHidden = !isHidden;
-        return this.isHidden;
     }
 }
