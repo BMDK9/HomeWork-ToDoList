@@ -49,23 +49,3 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: create
-
----
-spring:
-  config:
-    activate:
-      on-profile: test
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-
-  datasource:
-    url: jdbc:h2:mem:~/todolist
-    driver-class-name: org.h2.Driver
-    username:
-    password:
